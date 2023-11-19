@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            background: url('backgrounds/woods.jpg') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative; /* Set position relative for pseudo-element */
+        }
+
+        .dark-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0); /* Initially transparent */
+            pointer-events: none; /* Allow interaction with underlying elements */
+            transition: background 0.5s ease; /* Smooth transition */
+            z-index: 1; /* Above the background image, but below the candles */
+        }
+
+        .candle-container {
+            position: absolute; /* Position candles absolutely */
+            top: 66vh; /* Adjust to position about 2/3 of the way down */
+        }
+
+        .candle {
+            position: relative;
+            width: 90px; /* Increased size */
+            height: 300px; /* Increased size */
+            background-color: rgb(210, 201, 173);
+            border-radius: 15px; /* Increased size */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            z-index: 2; /* Set a higher z-index for lit candles */
+        }
+
+        .flame {
+            width: 36px; /* Increased size */
+            height: 75px; /* Increased size */
+            border-radius: 50%;
+            margin-top: -60px; /* Adjusted position */
+            background: radial-gradient(circle, #ffeda3 20%, transparent 80%);
+            animation: flicker 1s infinite alternate;
+            display: none;
+        }
+
+        .dark-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0); /* Initially transparent */
+            pointer-events: none; /* Allow interaction with underlying elements */
+            transition: background 0.5s ease; /* Smooth transition */
+            z-index: 1; /* Behind candles */
+        }
+
+        #flame1 {
+        animation-delay: 0.2s;
+        }
+
+        #flame2 {
+            animation-delay: 0.4s;
+        }
+
+        #flame3 {
+            animation-delay: 0.1s;
+        }
+
+        #flame4 {
+            animation-delay: 0.3s;
+        }
+
+        #flame5 {
+            animation-delay: 0.5s;
+        }
+
+        #flame6 {
+            animation-delay: 0.2s;
+        }
+
+        #flame7 {
+            animation-delay: 0.4s;
+        }
+
+        #flame8 {
+            animation-delay: 0.1s;
+        }
+
+        #flame9 {
+            animation-delay: 0.3s;
+        }
+
+        #flame10 {
+            animation-delay: 0.5s;
+        }
+
+        @keyframes flicker {
+            0% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0.8;
+            }
+        }
+
+        button, input[type="range"], #songNameBox {
+            border: none;
+            outline: none;
+            padding: 10px;
+            margin: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            color: #fff;
+            background-color: #333;
+            border-radius: 5px;
+            height: 40px; /* Set a fixed height for consistency */
+        }
+
+        input[type="range"] {
+            width: 150px;
+            vertical-align: middle; /* Align the volume slider vertically with the buttons */
+        }
+
+        #songNameBox {
+            text-align: left;
+        }
+
+    </style>
+    <title>Woods Background</title>
+</head>
+<body>
+    <div class="dark-overlay" id="darkOverlay"></div>
+
+    <!-- Candle containers -->
+    <div class="candle-container" style="left: 5%;">
+        <div class="candle" onclick="toggleFlame(1)">
+            <div class="flame" id="flame1"></div>
+        </div>
+    </div>
+    <div class="candle-container" style="left: 15%;">
+        <div class="candle" onclick="toggleFlame(2)">
+            <div class="flame" id="flame2"></div>
+        </div>
+    </div>
+    <div class="candle-container" style="left: 25%;">
+        <div class="candle" onclick="toggleFlame(3)">
+            <div class="flame" id="flame3"></div>
+        </div>
+    </div>
+    <div class="candle-container" style="left: 35%;">
+        <div class="candle" onclick="toggleFlame(4)">
+            <div class="flame" id="flame4"></div>
+        </div>
+    </div>
+    <div class="candle-container" style="left: 45%;">
+        <div class="candle" onclick="toggleFlame(5)">
+            <div class="flame" id="flame5"></div>
+        </div>
+    </div>
+    <div class="candle-container" style="left: 55%;">
+        <div class="candle" onclick="toggleFlame(6)">
+            <div class="flame" id="flame6"></div>
+        </div>
+    </div>
+    <div class="candle-container" style="left: 65%;">
+        <div class="candle" onclick="toggleFlame(7)">
+            <div class="flame" id="flame7"></div>
+        </div>
+    </div>
+    <div class="candle-container" style="left: 75%;">
+        <div class="candle" onclick="toggleFlame(8)">
+            <div class="flame" id="flame8"></div>
+        </div>
+    </div>
+    <div class="candle-container" style="left: 85%;">
+        <div class="candle" onclick="toggleFlame(9)">
+            <div class="flame" id="flame9"></div>
+        </div>
+    </div>
+    <div class="candle-container" style="left: 95%;">
+        <div class="candle" onclick="toggleFlame(10)">
+            <div class="flame" id="flame10"></div>
+        </div>
+    </div>
+
+
+    <audio id="creepyAudio" loop autoplay>
+        Your browser does not support the audio tag.
+    </audio>
+
+
+    <div style="position: fixed; top: 10px; right: 10px;">
+        <div id="songNameBox">
+            <p id="songName"></p>
+        </div>
+        <button onclick="skipSong()">Skip</button>
+        <button id="pauseButton" onclick="togglePlayPause()">Pause Music</button>
+        <input type="range" id="volumeSlider" min="0" max="100" value="50" oninput="updateVolume()">
+    </div>
+    
+
+    <script>
+
+        function toggleFlame(index) {
+            const flame = document.getElementById(`flame${index}`);
+            flameToggles[index - 1] = !flameToggles[index - 1];
+
+            if (flameToggles[index - 1]) {
+                flame.style.display = "block";
+            } else {
+                flame.style.display = "none";
+            }
+
+            updateDarkOverlay();
+        }
+
+        function updateDarkOverlay() {
+            const darkOverlay = document.getElementById('darkOverlay');
+            const numUnlitCandles = flameToggles.filter(toggle => !toggle).length;
+            const darkness = numUnlitCandles * 0.1; // Adjust the darkness factor as needed
+            darkOverlay.style.background = `rgba(0, 0, 0, ${darkness})`;
+
+            // Adjust z-index based on lit/unlit candles
+            const candleContainers = document.querySelectorAll('.candle-container');
+            candleContainers.forEach((container, index) => {
+                const zIndex = flameToggles[index] ? 2 : 0;
+                container.style.zIndex = zIndex;
+            });
+        }
+
+        function getRandomIndex() {
+            let newIndex = currentSongIndex;
+            while (newIndex === currentSongIndex || newIndex === previousSongIndex) {
+                newIndex = Math.floor(Math.random() * musicFiles.length);
+            }
+            return newIndex;
+        }
+
+        function playNextSong() {
+            const creepyAudio = document.getElementById('creepyAudio');
+
+            previousSongIndex = currentSongIndex;
+            currentSongIndex = getRandomIndex();
+
+            creepyAudio.src = getRandomSong();
+            creepyAudio.play();
+        }
+
+        function getRandomSong() {
+            return `music/${musicFiles[currentSongIndex]}`;
+        }
+
+        // Function to skip to the next song
+        function skipSong() {
+            if(!isMusicPlaying){
+                togglePlayPause()
+            }
+            playNextSong();
+            
+        }
+
+        // Function to pause or play the music
+        function togglePlayPause() {
+            const creepyAudio = document.getElementById('creepyAudio');
+            if (isMusicPlaying) {
+                creepyAudio.pause();
+            } else {
+                creepyAudio.play();
+            }
+            isMusicPlaying = !isMusicPlaying;
+            updatePauseButton();
+        }
+
+        // Function to update the text on the pause/play button
+        function updatePauseButton() {
+            const pauseButton = document.getElementById('pauseButton');
+            pauseButton.textContent = isMusicPlaying ? 'Pause Music' : 'Play Music';
+        }
+
+        // Function to update the volume
+        function updateVolume() {
+            const creepyAudio = document.getElementById('creepyAudio');
+            const volumeSlider = document.getElementById('volumeSlider');
+            creepyAudio.volume = volumeSlider.value / 300;
+        }
+
+        // Function to update the song name display
+        function updateSongName() {
+            const creepyAudio = document.getElementById('creepyAudio');
+            const songNameElement = document.getElementById('songName');
+            const currentSong = decodeURIComponent(creepyAudio.src.split('/').pop()); // Decode URI components
+            const songName = currentSong.replace('.mp3', '').replace(/_/g, ' '); // Remove .mp3 and replace underscores with spaces
+            songNameElement.textContent = `Now Playing: ${songName}`;
+        }
+        
+        let musicFiles = ['Angst.mp3', 'Anxiety.mp3', 'Apprehension.mp3', 'Bad Encounter.mp3',
+                        'Cornered.mp3', 'Dark Walk.mp3', 'Living in the Dark.mp3', 'Long Note Four.mp3', 
+                        'Midnight Meeting.mp3', 'Morbid Mind.mp3', 'Nebula.mp3', 'Redletter.mp3', 'Rising Walls.mp3',
+                        'Scent of Night.mp3', 'SCP-x5x.mp3', 'SCP-x6x.mp3', 'Strange Vision.mp3', 'The Dread.mp3',
+                        'Unease Piano.mp3', 'Walking Into Darkness.mp3']; // List of available songs
+        let previousSongIndex = -1;
+        let isMusicPlaying = true; // Variable to track playback state
+        let currentSongIndex = -1; // Index of the currently playing song
+        let flameToggles = Array(10).fill(false); // Start all candles as lit
+
+        // Listen for the end of the audio to play the next song
+        creepyAudio.addEventListener('ended', playNextSong);
+        // Listen for changes in the audio playback time to update the song name
+        creepyAudio.addEventListener('timeupdate', updateSongName);
+
+        updateVolume()
+        playNextSong()
+        for (let i = 1; i <= 10; i++) {
+            toggleFlame(i);
+        }
+    </script>
+</body>
+</html>
